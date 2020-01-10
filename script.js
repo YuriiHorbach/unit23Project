@@ -52,13 +52,12 @@ function plus(){
 
         btnPlus[j].onclick = function(e){
             console.log(cart);
-            let textContent = e.target.parentNode.parentNode.querySelector('.goods').innerText;
-            +textContent;
-            console.log(textContent);
-            console.log(cart[textContent]);
-            let textContent2 = e.target.parentNode.parentNode.querySelector('.quantity');
-            console.log(textContent2);
-            textContent2.innerHTML = cart[textContent] += 1;
+            let content = e.target.parentNode.parentNode.querySelector('.goods').innerText;
+            console.log(content);
+            console.log(cart[content]);
+            let content2 = e.target.parentNode.parentNode.querySelector('.quantity');
+            console.log(content2);
+            content2.innerHTML = cart[content]++;
             localStorage.setItem('cart', JSON.stringify(cart));
         }
     }
@@ -69,14 +68,17 @@ function minus(){
     for(let j = 0; j < btnMinus.length; j++){
 
         btnMinus[j].onclick = function(e){
+            console.log(cart);
             let content = e.target.parentNode.parentNode.querySelector('.goods').innerText;
+            console.log(content);
+            console.log(cart[content]);
             let content2 = e.target.parentNode.parentNode.querySelector('.quantity');
+            console.log(content2);
             let  numberQuantity = parseInt(content2.innerHTML);
-            content2.innerHTML = cart[content] -= 1;
-
-           
-            
-            
+            content2.innerHTML = cart[content]--;
+            if(cart[content] < 1){
+                cart[content] = 1;
+            }
             localStorage.setItem('cart', JSON.stringify(cart));
         }
     }
