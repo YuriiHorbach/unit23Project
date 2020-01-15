@@ -8,6 +8,7 @@ function t10() {
     
     localStorage.setItem('cart', JSON.stringify(cart));
     t11();
+    t12();
 
     document.querySelector('.b-10').disabled = true;
    
@@ -35,7 +36,7 @@ function t11(){
                 <td>
                     <button class = "plus">+</button>
                 </td>
-                <td class = "goods">
+                <td class = "goods" data = "${i}">
                     ${i}
                 </td>
                 <td>
@@ -48,10 +49,9 @@ function t11(){
                 
             </tr>
         `;
-
-        
         plus();
         minus();
+       
 
         
         let btnMinus = document.querySelector('.minus');
@@ -61,42 +61,45 @@ function t11(){
 }
 
 
+function t12(){
+    function plus(){
+        let btnPlus = document.querySelectorAll('.plus'); 
+        for(let j = 0; j < btnPlus.length; j++){
 
-function plus(){
-    let btnPlus = document.querySelectorAll('.plus'); 
-    for(let j = 0; j < btnPlus.length; j++){
-
-        btnPlus[j].onclick = function(e){
-            console.log(cart);
-            let content = e.target.parentNode.parentNode.querySelector('.goods').innerText;
-            console.log(content);
-            console.log(cart[content]);
-            let content2 = e.target.parentNode.parentNode.querySelector('.quantity');
-            console.log(content2);
-            content2.innerHTML = ++cart[content];
-            localStorage.setItem('cart', JSON.stringify(cart));
-        }
-    }
-}
-
-function minus(){
-    let btnMinus = document.querySelectorAll('.minus'); 
-    for(let j = 0; j < btnMinus.length; j++){
-
-        btnMinus[j].onclick = function(e){
-            console.log(cart);
-            let content = e.target.parentNode.parentNode.querySelector('.goods').innerText;
-            console.log(content);
-            console.log(cart[content]);
-            let content2 = e.target.parentNode.parentNode.querySelector('.quantity');
-            console.log(content2);
-            let  numberQuantity = parseInt(content2.innerHTML);
-            content2.innerHTML = cart[content] -=1;
-            if(cart[content] < 1){
-                content2.innerHTML = 1;
-                cart[content] = 1;
+            btnPlus[j].onclick = function(e){
+                console.log(cart);
+                let content = e.target.parentNode.parentNode.querySelector('.goods').innerText;
+                console.log(content);
+                console.log(cart[content]);
+                let content2 = e.target.parentNode.parentNode.querySelector('.quantity');
+                console.log(content2);
+                content2.innerHTML = ++cart[content];
+                localStorage.setItem('cart', JSON.stringify(cart));
             }
-            localStorage.setItem('cart', JSON.stringify(cart));
         }
     }
+
+    function minus(){
+        let btnMinus = document.querySelectorAll('.minus'); 
+        for(let j = 0; j < btnMinus.length; j++){
+
+            btnMinus[j].onclick = function(e){
+                console.log(cart);
+                let content = e.target.parentNode.parentNode.querySelector('.goods').innerText;
+                console.log(content);
+                console.log(cart[content]);
+                let content2 = e.target.parentNode.parentNode.querySelector('.quantity');
+                console.log(content2);
+                let  numberQuantity = parseInt(content2.innerHTML);
+                content2.innerHTML = cart[content] -=1;
+                if(cart[content] < 1){
+                    content2.innerHTML = 1;
+                    cart[content] = 1;
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+        }
+    }
+
+    let btnMinus = document.querySelectorAll('.minus'); 
 }
