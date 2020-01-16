@@ -7,8 +7,8 @@ console.log(cart);
 function t10() {
     
     localStorage.setItem('cart', JSON.stringify(cart));
-    t11();
-    t12();
+
+    t14();
 
     document.querySelector('.b-10').disabled = true;
    
@@ -17,9 +17,9 @@ document.querySelector('.b-10').onclick = t10;
 
 
 function t11(){
-    let card = localStorage.getItem('card');
+    // let card = localStorage.getItem('card');
 
-    val = JSON.parse(card);
+    // val = JSON.parse(card);
 
     let table = document.createElement('table');
     let out = document.querySelector('.out');
@@ -29,36 +29,47 @@ function t11(){
 
     let btnPlus = document.createElement('button');
     btnPlus.className = 'plus';
-
-    for(let i in cart){
+    let sum = 0;
+   
+    if(cart){
         table.innerHTML += `
-            <tr>
-                <td>
-                    <button class = "plus">+</button>
-                </td>
-                <td class = "goods" data = "${i}">
-                    ${i}
-                </td>
-                <td>
-                    <button class = "minus">-</button>
-                </td>
-                <td class = "quantity">
-                    ${cart[i]}
-                </td>
-            
-                
-            </tr>
-        `;
-        // plus();
-        // minus();
-        t12();
-       
-
+            <thead>
+                <tr>
+                    <th colspan = "3">Name</th>
+                    <th colspan = "3">Quantity</th>
+                </tr>
+            </thead>`;
+        let sum = 0;
+        for(let i in cart){
         
-        let btnMinus = document.querySelector('.minus');
-        console.log(btnPlus);
-        console.log(btnMinus);
+            table.innerHTML += `
+                <tr>
+                    <td>
+                        <button class = "plus">+</button>
+                    </td>
+                    <td class = "goods" data = "${i}">
+                        ${i}
+                    </td>
+                    <td>
+                        <button class = "minus">-</button>
+                    </td>
+                    <td class = "quantity">
+                        ${cart[i]}
+                    </td>
+                </tr>
+            `;
+            sum += cart[i];
+            t12();
+        }
     }
+    table.innerHTML += `
+    <tr>
+        <td colspan = "3">Total</td>
+        <td class = "totalSum">
+            ${sum}
+         </td>
+    </tr>
+`;
 }
 
 
@@ -76,8 +87,10 @@ function t12(){
                 console.log(content2);
                 content2.innerHTML = ++cart[content];
                 localStorage.setItem('cart', JSON.stringify(cart));
+                t13();
             }
         }
+        
    
         let btnMinus = document.querySelectorAll('.minus'); 
         for(let j = 0; j < btnMinus.length; j++){
@@ -96,7 +109,37 @@ function t12(){
                     cart[content] = 1;
                 }
                 localStorage.setItem('cart', JSON.stringify(cart));
+                t13();
             }
         }
    
+}
+
+
+// Task 13 ============================================
+/*  Добавьте в таблицу footer который считает общее количество товара. */
+
+function t13() {
+    let totalCells = document.querySelectorAll('.quantity');
+    let totalSum = document.querySelector('.totalSum');
+
+    let sum = 0;
+
+    for(let i = 0; i < totalCells.length; i++){
+        sum += parseInt(totalCells[i].innerText);
+        console.log(sum);
+        totalSum.innerText = sum;
+    };
+}
+// ваше событие здесь!!!
+
+function t14(){
+    let cart = localStorage.getItem('cart');
+    if(cart !== null){
+        t11();
+        t12();
+    }
+    else{
+        document.querySelector('.out').innerHTML = 'Cart is empty';
+    }
 }
