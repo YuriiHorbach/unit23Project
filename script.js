@@ -49,8 +49,9 @@ function t11(){
                 
             </tr>
         `;
-        plus();
-        minus();
+        // plus();
+        // minus();
+        t12();
        
 
         
@@ -62,7 +63,7 @@ function t11(){
 
 
 function t12(){
-    function plus(){
+   
         let btnPlus = document.querySelectorAll('.plus'); 
         for(let j = 0; j < btnPlus.length; j++){
 
@@ -77,9 +78,7 @@ function t12(){
                 localStorage.setItem('cart', JSON.stringify(cart));
             }
         }
-    }
-
-    function minus(){
+   
         let btnMinus = document.querySelectorAll('.minus'); 
         for(let j = 0; j < btnMinus.length; j++){
 
@@ -99,7 +98,5 @@ function t12(){
                 localStorage.setItem('cart', JSON.stringify(cart));
             }
         }
-    }
-
-    let btnMinus = document.querySelectorAll('.minus'); 
+   
 }
